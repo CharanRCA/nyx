@@ -320,20 +320,19 @@
     async function initializeAppFirebase() {
         appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
         
-        let firebaseConfig;
-        try {
-            firebaseConfig = JSON.parse(__firebase_config);
-        } catch (e) {
-            console.error("Error parsing __firebase_config, using fallback:", e);
-            firebaseConfig = { apiKey: "", authDomain: "", projectId: "", storageBucket: "" }; 
-        }
+        // --- HARDCODED FIREBASE CONFIGURATION as requested by the user ---
+        const firebaseConfig = {
+          "apiKey": "AIzaSyDgs_cNZFe4TS6AoVfOUXalBEoLN42Lvn0",
+          "authDomain": "cosmixserverz.firebaseapp.com",
+          "projectId": "cosmixserverz",
+          "storageBucket": "cosmixserverz.appspot.com",
+          "messagingSenderId": "925350866529",
+          "appId": "1:925350866529:web:e4ffe81d9b0fedfbea0420",
+          "measurementId": "G-6S7RW3183X"
+        };
+        // -----------------------------------------------------------------
 
         try {
-            if (!firebaseConfig.apiKey) {
-                console.error("Firebase config is missing or invalid.");
-                return;
-            }
-
             app = initializeApp(firebaseConfig);
             auth = getAuth(app);
             db = getFirestore(app);
